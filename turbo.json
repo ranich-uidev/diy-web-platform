@@ -1,0 +1,25 @@
+{
+ "$schema": "https://turbo.build",
+  "globalDotEnv": [".env"],
+  "globalEnv": ["DATABASE_URL", "DIRECT_URL"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "package.json"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    }
+  }
+}

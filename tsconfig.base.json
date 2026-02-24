@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["DOM", "ES2020"],
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "paths": {
+      "@repo/ui/*": ["packages/diy-web-ui/src/*"],
+      "@repo/*": ["packages/*/src/*"]
+    },
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["packages/*/src", "apps/*/src"]
+}
