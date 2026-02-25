@@ -1,0 +1,25 @@
+{
+  "name": "@repo/agents",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "dev": "tsc --watch",
+    "test:agent": "tsx src/test-cli.ts"
+  },
+  "dependencies": {
+    "@langchain/core": "latest",
+    "@langchain/langgraph": "^1.1.5",
+    "@langchain/openai": "latest",
+    "tsx": "^4.21.0",
+    "zod": "^4.3.6",
+    "@repo/db": "file:../../packages/database"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "vitest": "latest"
+  }
+  
+}

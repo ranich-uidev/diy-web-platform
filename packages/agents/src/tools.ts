@@ -17,6 +17,7 @@ export const createLeadTool = tool(
     }
 
     try {
+      // First try to create a new lead
       const lead = await db.lead.create({
         data: {
           name,
@@ -28,6 +29,23 @@ export const createLeadTool = tool(
 
       return `Success: Lead created for ${name}. ID: ${lead.id}`;
     } catch (error: any) {
+      // On unique constraint violation (P2002) we treat it as "lead already exists" and update instead
+      if (error?.code === "P2002") {
+        console.log("DEBUG: P2002 on Lead.email, updating existing lead instead.");
+
+        await db.lead.updateMany({
+          where: { email },
+          data: {
+            name,
+            intent,
+            status: "RECURRING",
+          },
+        });
+
+        const existing = await db.lead.findFirst({ where: { email } });
+        return `Success: Lead updated for ${name}. ID: ${existing?.id ?? "unknown"}`;
+      }
+
       console.error("Database Error:", error);
       return `Error: Failed to save lead to the database. ${error.message}`;
     }

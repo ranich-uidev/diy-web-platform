@@ -6,8 +6,9 @@
     "moduleResolution": "Node",
     "baseUrl": ".",
     "paths": {
-      "@repo/ui/*": ["packages/diy-web-ui/src/*"],
-      "@repo/*": ["packages/*/src/*"]
+      "@repo/ui/*": ["packages/diy-web-ui/src/*"], 
+      "@repo/database": ["packages/database/index.ts"],
+      "@repo/agents": ["packages/agents/src/*"]
     },
     "jsx": "react-jsx",
     "strict": true,

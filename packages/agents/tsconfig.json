@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "incremental": true,
+    "module": "preserve",
+    "moduleResolution": "bundler", // 👈 This is the fix for LangChain packages
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+ 
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

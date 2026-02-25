@@ -1,10 +1,21 @@
 // packages/database/schema.prisma
 generator client {
-  provider = "prisma-client-js" // Note: v7 uses "prisma-client", not "prisma-client-js"
-  output   = "../generated/prisma/client" // Mandatory in v7 monorepos
+  provider = "prisma-client" // Note: v7 uses "prisma-client", not "prisma-client-js"
+  output   = "../generated/prisma" // Mandatory in v7 monorepos
 }
 
 datasource db {
   provider = "postgresql"
   // url is GONE from here
+}
+// packages/database/schema.prisma
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique  
+  intent    String
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
