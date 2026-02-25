@@ -1,29 +1,31 @@
-// packages/database/src/index.ts
 import { PrismaClient } from "../generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 
-// Global cache to prevent connection leaks during Next.js HMR
-// packages/database/src/index.ts
-export function getTenantDb(schemaName: string) {
-  // Use process.env directly to ensure we get the string
-  const dbUrl = process.env.DATABASE_URL;
+// 1. Setup the Platform DB (Public Schema)
+// We define this globally so it's only created once
+const platformPool = new Pool({ connectionString: process.env.DATABASE_URL });
+const platformAdapter = new PrismaPg(platformPool);
+export const platformDb = new PrismaClient({ adapter: platformAdapter });
 
-  if (!dbUrl) {
-    console.error("❌ DATABASE_URL is missing from process.env");
-    throw new Error("DATABASE_URL is not defined");
+// 2. The Tenant DB Factory
+export function getTenantDb(schemaName: string): any {
+  const baseUrl = process.env.DIRECT_URL ?? process.env.DATABASE_URL;
+
+  if (!baseUrl) {
+    throw new Error("❌ DIRECT_URL / DATABASE_URL is not defined in environment variables");
   }
 
-  // Logic to handle the schema parameter correctly
-  const urlWithSchema = dbUrl.includes('?') 
-    ? `${dbUrl}&schema=${schemaName}` 
-    : `${dbUrl}?schema=${schemaName}`;
+  // Inject the schema into the connection string
+  const urlWithSchema = baseUrl.includes("?")
+    ? `${baseUrl}&schema=${schemaName}`
+    : `${baseUrl}?schema=${schemaName}`;
 
-  const pool = new Pool({ connectionString: urlWithSchema });
-  const adapter = new PrismaPg(pool);
+  // For tenant-specific clients, we still use an adapter
+  const tenantPool = new Pool({ connectionString: urlWithSchema });
+  const tenantAdapter = new PrismaPg(tenantPool);
 
-  return new PrismaClient({ adapter });
+  return new PrismaClient({ adapter: tenantAdapter });
 }
-
 
 export * from "../generated/prisma/client";
