@@ -2,8 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "jsx": "preserve"
+    "paths": {
+      "@/*": ["diy-web-ui/*"]
+    }
   },
-  "include": ["index.ts", "prisma.config.ts", "provisioning.ts"],
+  "include": ["components/**/*.ts", "components/**/*.tsx"],
   "exclude": ["node_modules"]
 }

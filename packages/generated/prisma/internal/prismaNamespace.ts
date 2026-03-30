@@ -384,7 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  Lead: 'Lead'
+  Lead: 'Lead',
+  SiteConfig: 'SiteConfig'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "lead"
+    modelProps: "lead" | "siteConfig"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +479,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SiteConfig: {
+      payload: Prisma.$SiteConfigPayload<ExtArgs>
+      fields: Prisma.SiteConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SiteConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SiteConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.SiteConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SiteConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload>
+        }
+        findMany: {
+          args: Prisma.SiteConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload>[]
+        }
+        create: {
+          args: Prisma.SiteConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload>
+        }
+        createMany: {
+          args: Prisma.SiteConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SiteConfigCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload>[]
+        }
+        delete: {
+          args: Prisma.SiteConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload>
+        }
+        update: {
+          args: Prisma.SiteConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.SiteConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SiteConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SiteConfigUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload>[]
+        }
+        upsert: {
+          args: Prisma.SiteConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.SiteConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSiteConfig>
+        }
+        groupBy: {
+          args: Prisma.SiteConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SiteConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SiteConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SiteConfigCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -523,10 +598,24 @@ export const LeadScalarFieldEnum = {
   email: 'email',
   intent: 'intent',
   status: 'status',
-  createdAt: 'createdAt'
+  tenantId: 'tenantId',
+  appliedConfigId: 'appliedConfigId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const SiteConfigScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  theme: 'theme',
+  layout: 'layout',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SiteConfigScalarFieldEnum = (typeof SiteConfigScalarFieldEnum)[keyof typeof SiteConfigScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -537,12 +626,36 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -576,6 +689,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -688,6 +815,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   lead?: Prisma.LeadOmit
+  siteConfig?: Prisma.SiteConfigOmit
 }
 
 /* Types for Logging */

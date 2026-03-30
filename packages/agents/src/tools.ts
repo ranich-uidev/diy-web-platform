@@ -4,7 +4,7 @@ import { z } from "zod";
 import { getTenantDb } from "../../database/index";
 
 export const createLeadTool = tool(
-  async ({ name, email, intent, tenantId }) => {
+  async ({ name, email, intent, tenantId, appliedConfigId }) => {
     const safeTenantId = tenantId.toLowerCase().replace(/[^a-z0-9_]/g, '');
 
     const db = getTenantDb(`tenant_${safeTenantId}`);
@@ -24,6 +24,8 @@ export const createLeadTool = tool(
           email,
           intent,
           status: "NEW",
+          tenantId,
+          appliedConfigId,
         },
       });
 
@@ -39,6 +41,8 @@ export const createLeadTool = tool(
             name,
             intent,
             status: "RECURRING",
+            appliedConfigId,
+            tenantId,
           },
         });
 
@@ -58,6 +62,7 @@ export const createLeadTool = tool(
       email: z.string().email().describe("The user's email address"),
       intent: z.string().describe("What the user is looking for (e.g., MRI Scan, Portfolio Review)"),
       tenantId: z.string().describe("The unique slug/subdomain of the business"),
+      appliedConfigId: z.string().describe("The user's full name"),
     }),
   }
   

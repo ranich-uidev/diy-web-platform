@@ -16,6 +16,18 @@ model Lead {
   email     String   @unique  
   intent    String
   status    String   @default("NEW")
+  tenantId String
+  appliedConfigId String?
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// packages/database/schema.prisma
+
+model SiteConfig {
+  id        String   @id @default(cuid())
+  tenantId  String   @unique
+  theme     Json     // Stores colors, fonts, and border-radius
+  layout    Json     // An array of components: [{ type: 'HERO', content: {...} }]
   updatedAt DateTime @updatedAt
 }

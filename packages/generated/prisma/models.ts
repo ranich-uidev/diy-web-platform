@@ -9,4 +9,5 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Lead.ts'
+export type * from './models/SiteConfig.ts'
 export type * from './commonInputTypes.ts'

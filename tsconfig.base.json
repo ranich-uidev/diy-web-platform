@@ -3,18 +3,25 @@
     "target": "ES2020",
     "module": "ESNext",
     "lib": ["DOM", "ES2020"],
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
-      "@repo/ui/*": ["packages/diy-web-ui/src/*"], 
+      "@repo/ui": ["packages/ui/src/index.ts"],
+      "@repo/ui/*": ["packages/ui/*"],
+      "@repo/db": ["packages/database/index.ts"],
       "@repo/database": ["packages/database/index.ts"],
-      "@repo/agents": ["packages/agents/src/*"]
+      "@repo/agents": ["packages/agents/src/index.ts"],
+      "@repo/agents/*": ["packages/agents/src/*"]
     },
     "jsx": "react-jsx",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "include": ["packages/*/src", "apps/*/src"]
+  "include": ["packages/*/src/**/*", "packages/*/*.ts", "apps/**/*.ts", "apps/**/*.tsx"],
+  "exclude": ["node_modules"]
 }

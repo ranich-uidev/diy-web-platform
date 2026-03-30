@@ -1,19 +1,13 @@
-import { Hero01 } from "packages/ui/src";
-import DatabaseConnection from "./database-connetion";
 
-
-
-export default function Home() {
-  
+import "./globals.css"
+export default function MarketingPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-       <Hero01 title="Welcome to DIY Platform" subtitle="this is to test" />
-      <div className="container mx-auto p-8">
-        <DatabaseConnection />
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-4xl font-bold">DIY Web Platform</h1>
+      <p className="mt-4 text-gray-600">Enter your subdomain to see your AI-generated site.</p>
+      <div className="mt-8 p-4 border rounded bg-gray-50">
+        Example: <code className="font-bold">vantage-estates.localhost:3000</code>
       </div>
-
-      </main>
     </div>
   );
 }

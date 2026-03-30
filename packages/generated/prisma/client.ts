@@ -44,3 +44,8 @@ export { Prisma }
  * 
  */
 export type Lead = Prisma.LeadModel
+/**
+ * Model SiteConfig
+ * 
+ */
+export type SiteConfig = Prisma.SiteConfigModel

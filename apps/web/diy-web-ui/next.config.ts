@@ -4,11 +4,13 @@ import path from "path";
 dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
 
 const nextConfig: NextConfig = {
-  
   env: {
     DATABASE_URL: process.env.DATABASE_URL,
   },
-  /* config options here */
+  transpilePackages: ["@repo/ui", "@repo/agents", "@repo/db"],
+  turbopack: {
+    root: path.resolve(__dirname, "../../.."),
+  },
 };
 
 export default nextConfig;

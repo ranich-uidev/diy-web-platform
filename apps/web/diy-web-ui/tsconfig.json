@@ -1,12 +1,13 @@
 {
-  "extends": "../../.././tsconfig.base.json",
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "composite": false,
     "incremental": true,
+    "moduleResolution": "bundler",
+    "declaration": true,
     "paths": {
-      // ...existing code...
-      "@repo/*": ["/app"]
-      // ...existing code...
+      "@/*": ["./*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

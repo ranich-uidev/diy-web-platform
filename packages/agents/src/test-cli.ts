@@ -11,12 +11,11 @@ async function testAgent() {
   const input = {
     messages: [
       new HumanMessage(
-        "Hi, I'm Sarah Jenkins. My email is sarah@example.com. " +
-        "I'm looking for an urgent MRI scan at the miami-mri clinic."
+        "Hi, I'm Rita rosevelt. My email is rita@example.com. " +
+        "I'm looking for awebsite with dubai views. for my business name is Vantage Estates"
       ),
     ],
   };
-
   try {
     const result = await agentExecutor.invoke(input);
     
